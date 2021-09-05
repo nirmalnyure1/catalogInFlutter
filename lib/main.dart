@@ -1,6 +1,7 @@
+import 'package:catalog_app/pages/loginpage.dart';
 import 'package:flutter/material.dart';
 
-import 'homepage.dart';
+import 'pages/homepage.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,8 +14,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      themeMode: ThemeMode.light,
+      darkTheme:
+          ThemeData(primarySwatch: Colors.purple, brightness: Brightness.dark),
+      theme: ThemeData(primarySwatch: Colors.purple),
+      initialRoute: '/home',
+      routes: {
+        "/": (context) => LoginPage(),
+        "/login": (context) => LoginPage(),
+        "/home": (context) => HomePage(),
+      },
     );
   }
 }
-

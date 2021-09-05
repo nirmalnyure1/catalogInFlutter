@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  int days = 30;
-  String name = 'codepur';
+  final int days = 30;
+  final String name = 'codepur';
 
   @override
   Widget build(BuildContext context) {
@@ -11,11 +11,14 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Calalog'),
+          centerTitle: true,
         ),
-        body: Container(
-          child: Text(
-            'wellcomem to $days day tutorial in flutter by $name',
-            style: TextStyle(color: Colors.black),
+        body: Center(
+          child: Container(
+            child: Text(
+              'wellcomem to $days day tutorial in flutter by $name',
+              style: TextStyle(color: Colors.black),
+            ),
           ),
         ),
         drawer: Drawer(),
