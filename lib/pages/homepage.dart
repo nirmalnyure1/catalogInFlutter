@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: Container(
           child: Text(
-            'wellcomem to $days day tutorial in flutter by $name',
+            context.runtimeType.toString(),
             style: TextStyle(color: Colors.black),
           ),
         ),
