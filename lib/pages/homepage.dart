@@ -3,10 +3,28 @@ import 'package:catalog_app/widgets/drawer.dart';
 import 'package:catalog_app/widgets/itmewedget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert' as convert;
 
-class HomePage extends StatelessWidget {
-  final int days = 30;
-  final String name = 'codepur';
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    var catalogJson = await rootBundle.loadString('assets/files/catalog.json');
+    var decodeData = convert.jsonDecode(catalogJson);
+    //print(decodeData);
+    var productData = decodeData['products'];
+    //print(productData);
+  }
 
   @override
   Widget build(BuildContext context) {
