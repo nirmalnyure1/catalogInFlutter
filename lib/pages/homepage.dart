@@ -8,22 +8,19 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Calalog'),
-          centerTitle: true,
-        ),
-        body: Center(
-          child: Container(
-            child: Text(
-              'wellcomem to $days day tutorial in flutter by $name',
-              style: TextStyle(color: Colors.black),
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Calalog'),
+      ),
+      body: Center(
+        child: Container(
+          child: Text(
+            'wellcomem to $days day tutorial in flutter by $name',
+            style: TextStyle(color: Colors.black),
           ),
         ),
-        drawer:MyDrawer(),
       ),
+      drawer: MyDrawer(),
     );
   }
 }
