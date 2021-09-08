@@ -1,6 +1,6 @@
 import 'package:catalog_app/models/catalog.dart';
 import 'package:catalog_app/widgets/drawer.dart';
-import 'package:catalog_app/widgets/itmewedget.dart';
+import 'package:catalog_app/widgets/itemwidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,28 +19,34 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async {
+    await Future.delayed(Duration(seconds: 2));
     var catalogJson = await rootBundle.loadString('assets/files/catalog.json');
     var decodeData = convert.jsonDecode(catalogJson);
-    //print(decodeData);
+
     var productData = decodeData['products'];
-    //print(productData);
+    CatalogModel.items =
+        List.from(productData).map<Item>((item) => Item.fromMap(item)).toList();
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    final dummyList = List.generate(20, (index) => CatalogModel.items[0]);
     return Scaffold(
       appBar: AppBar(
         title: Text('Calalog'),
       ),
-      body: ListView.builder(
-        itemCount: dummyList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ItemWidget(
-            item: dummyList[index],
-          );
-        },
-      ),
+      body: CatalogModel.items.isEmpty
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView.builder(
+              itemCount: CatalogModel.items.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ItemWidget(
+                  item: CatalogModel.items[index],
+                );
+              },
+            ),
       drawer: MyDrawer(),
     );
   }
