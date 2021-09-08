@@ -39,11 +39,42 @@ class _HomePageState extends State<HomePage> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : ListView.builder(
+          : GridView.builder(
               itemCount: CatalogModel.items.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 20.0,
+                crossAxisSpacing: 20.0,
+              ),
               itemBuilder: (BuildContext context, int index) {
-                return ItemWidget(
-                  item: CatalogModel.items[index],
+                final item = CatalogModel.items[index];
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: GridTile(
+                      header: Container(
+                        padding: EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(color: Colors.deepPurple),
+                        child: Text(
+                          item.name,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      child: Image.network(item.image),
+                      footer: Container(
+                        padding: EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(color: Colors.black),
+                        child: Text(
+                          item.price.toString(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
                 );
               },
             ),
