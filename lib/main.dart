@@ -2,7 +2,7 @@ import 'package:catalog_app/pages/loginpage.dart';
 import 'package:catalog_app/utils/route.dart';
 import 'package:catalog_app/widgets/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 import 'pages/homepage.dart';
 

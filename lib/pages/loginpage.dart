@@ -25,7 +25,6 @@ class _LoginPageState extends State<LoginPage> {
       });
     }
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(height: 50.0),
 
                         Material(
-                          color: Colors.purple.shade800,
+                          color: Theme.of(context).primaryColor,
                           borderRadius:
                               BorderRadius.circular(changeButton ? 50 : 10.0),
                           child: InkWell(
@@ -110,10 +109,6 @@ class _LoginPageState extends State<LoginPage> {
                               duration: Duration(seconds: 1),
                               height: 40,
                               width: changeButton ? 40 : 120,
-                              // decoration: BoxDecoration(
-                              //     color: Colors.purple.shade800,
-                              //     borderRadius: BorderRadius.circular(
-                              //         changeButton ? 50 : 10.0)),
                               child: Center(
                                 child: changeButton
                                     ? Icon(
@@ -127,14 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         )
-                        // ElevatedButton(
-                        //   onPressed: () {
-
-                        //     Navigator.pushNamed(context, MyRoutes.homeRoute);
-                        //   },
-                        //   style: TextButton.styleFrom(minimumSize: Size(120, 40)),
-                        //   child: Text(' LOGIN '),
-                        // )
+                       
                       ],
                     ),
                   )
