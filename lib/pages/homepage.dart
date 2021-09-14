@@ -1,5 +1,4 @@
 import 'package:catalog_app/models/catalog.dart';
-import 'package:catalog_app/pages/cartPage.dart';
 import 'package:catalog_app/utils/route.dart';
 import 'package:catalog_app/widgets/homeWidgets/catalogHeader.dart';
 import 'package:catalog_app/widgets/homeWidgets/catalogList.dart';
@@ -32,16 +31,26 @@ class _HomePageState extends State<HomePage> {
         List.from(productData).map<Item>((item) => Item.fromMap(item)).toList();
     setState(() {});
   }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyTheme.creamColor,
+      //backgroundColor: context.cardColor,
+      backgroundColor: Theme.of(context).canvasColor,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, MyRoutes.cartPageRoute);
         },
-        child: Icon(Icons.stroller_outlined),
+        backgroundColor: context.canvasColor,
+        child: Icon(
+          Icons.stroller_outlined,
+          color: context.accentColor,
+        ),
       ),
       body: SafeArea(
         child: Container(

@@ -1,4 +1,5 @@
-import 'package:catalog_app/widgets/theme.dart';
+
+
 import 'package:flutter/material.dart';
 
 import 'package:catalog_app/models/catalog.dart';
@@ -14,9 +15,9 @@ class HomeDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyTheme.creamColor,
+      backgroundColor: context.cardColor,
       appBar: AppBar(backgroundColor: Colors.transparent),
-      bottomNavigationBar: bottomwidget(catalog).p16(),
+      bottomNavigationBar: bottomwidget(catalog, context).p16(),
       body: SafeArea(
         child: Column(
           children: [
@@ -33,15 +34,15 @@ class HomeDetailPage extends StatelessWidget {
                 arcType: VxArcType.CONVEY,
                 child: Container(
                   width: context.screenWidth,
-                  color: Colors.white,
+                  color: (context.canvasColor),
                   child: Column(
                     children: [
                       50.heightBox,
                       catalog.name.text.lg.bold
-                          .color(MyTheme.darkBluishColor)
+                          .color(context.accentColor)
                           .make(),
                       10.heightBox,
-                      catalog.desc.text.color(MyTheme.darkBluishColor).make(),
+                      catalog.desc.text.color(context.accentColor).make(),
                     ],
                   ),
                 ),
@@ -52,27 +53,26 @@ class HomeDetailPage extends StatelessWidget {
       ),
     );
   }
-}
 
-ButtonBar bottomwidget(catalog) {
-  return ButtonBar(
-    buttonPadding: Vx.m0,
-    //buttonPadding: EdgeInsets.zero,
-    alignment: MainAxisAlignment.spaceAround,
-    children: [
-      "\$${catalog.price}".text.xl.bold.make(),
-      ElevatedButton(
-        onPressed: () {},
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(
-            MyTheme.darkBluishColor,
+  ButtonBar bottomwidget(catalog, BuildContext context) {
+    return ButtonBar(
+      buttonPadding: Vx.m0,
+      //buttonPadding: EdgeInsets.zero,
+      alignment: MainAxisAlignment.spaceAround,
+      children: [
+        "\$${catalog.price}".text.xl.bold.make(),
+        ElevatedButton(
+          onPressed: () {},
+          style: ButtonStyle(
+            backgroundColor:
+                MaterialStateProperty.all(context.theme.buttonColor),
+            shape: MaterialStateProperty.all(
+              StadiumBorder(),
+            ),
           ),
-          shape: MaterialStateProperty.all(
-            StadiumBorder(),
-          ),
-        ),
-        child: "add to cart".text.make(),
-      ).wh(100, 40).pOnly(right: 10),
-    ],
-  );
+          child: "add to cart".text.make(),
+        ).wh(100, 40).pOnly(right: 10),
+      ],
+    );
+  }
 }
