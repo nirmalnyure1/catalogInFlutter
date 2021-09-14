@@ -1,4 +1,6 @@
 import 'package:catalog_app/models/catalog.dart';
+import 'package:catalog_app/pages/cartPage.dart';
+import 'package:catalog_app/utils/route.dart';
 import 'package:catalog_app/widgets/homeWidgets/catalogHeader.dart';
 import 'package:catalog_app/widgets/homeWidgets/catalogList.dart';
 import 'package:catalog_app/widgets/theme.dart';
@@ -35,6 +37,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyTheme.creamColor,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, MyRoutes.cartPageRoute);
+        },
+        child: Icon(Icons.stroller_outlined),
+      ),
       body: SafeArea(
         child: Container(
           padding: Vx.m16,

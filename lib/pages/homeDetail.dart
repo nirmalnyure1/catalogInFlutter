@@ -15,7 +15,7 @@ class HomeDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyTheme.creamColor,
-      appBar: AppBar(),
+      appBar: AppBar(backgroundColor: Colors.transparent),
       bottomNavigationBar: bottomwidget(catalog).p16(),
       body: SafeArea(
         child: Column(
@@ -71,7 +71,7 @@ ButtonBar bottomwidget(catalog) {
             StadiumBorder(),
           ),
         ),
-        child: "Buy".text.make(),
+        child: "add to cart".text.make(),
       ).wh(100, 40).pOnly(right: 10),
     ],
   );

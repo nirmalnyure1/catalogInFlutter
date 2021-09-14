@@ -16,7 +16,6 @@ class ItemView extends StatelessWidget {
         children: [
           Hero(
             tag: Key(catalog.id.toString()),
-
             child: CatalogImage(
               image: image,
             ),
@@ -45,7 +44,7 @@ class ItemView extends StatelessWidget {
                         StadiumBorder(),
                       ),
                     ),
-                    child: "Buy".text.make(),
+                    child: "add to cart".text.make(),
                   ).pOnly(right: 10)
                 ],
               )
