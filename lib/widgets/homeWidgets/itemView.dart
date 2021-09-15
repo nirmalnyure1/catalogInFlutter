@@ -1,7 +1,9 @@
-import 'package:catalog_app/models/catalog.dart';
-import 'package:catalog_app/widgets/homeWidgets/catalogImage.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import 'package:catalog_app/models/cart.dart';
+import 'package:catalog_app/models/catalog.dart';
+import 'package:catalog_app/widgets/homeWidgets/catalogImage.dart';
 
 class ItemView extends StatelessWidget {
   final Item catalog;
@@ -33,18 +35,7 @@ class ItemView extends StatelessWidget {
                 alignment: MainAxisAlignment.spaceAround,
                 children: [
                   "\$${catalog.price}".text.bold.make(),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                        context.theme.buttonColor,
-                      ),
-                      shape: MaterialStateProperty.all(
-                        StadiumBorder(),
-                      ),
-                    ),
-                    child: "add to cart".text.make(),
-                  ).pOnly(right: 10)
+                  _AddToCart(catalog: catalog).pOnly(right: 10)
                 ],
               )
             ],
@@ -52,5 +43,45 @@ class ItemView extends StatelessWidget {
         ],
       ),
     ).color(context.cardColor).roundedLg.square(150).make().py(12);
+  }
+}
+
+class _AddToCart extends StatefulWidget {
+  final Item catalog;
+  const _AddToCart({
+    Key? key,
+    required this.catalog,
+  }) : super(key: key);
+
+  @override
+  __AddToCartState createState() => __AddToCartState();
+}
+
+class __AddToCartState extends State<_AddToCart> {
+  bool isAdded = false;
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        isAdded = isAdded.toggle();
+        final _catalog = CatalogModel();
+
+        final _cart = Cart();
+        //seting cart 
+        _cart.catalog = _catalog; 
+        //adding cart
+        _cart.add(widget.catalog);
+        setState(() {});
+      },
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(
+          context.theme.buttonColor,
+        ),
+        shape: MaterialStateProperty.all(
+          StadiumBorder(),
+        ),
+      ),
+      child: isAdded ? Icon(Icons.done) : "add to cart".text.make(),
+    );
   }
 }
