@@ -59,14 +59,9 @@ class _CartTotal extends StatelessWidget {
   }
 }
 
-class _CartList extends StatefulWidget {
+class _CartList extends StatelessWidget {
   const _CartList({Key? key}) : super(key: key);
 
-  @override
-  __CartListState createState() => __CartListState();
-}
-
-class __CartListState extends State<_CartList> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
