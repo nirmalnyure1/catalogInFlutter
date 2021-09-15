@@ -2,7 +2,6 @@ import 'package:catalog_app/models/catalog.dart';
 import 'package:catalog_app/utils/route.dart';
 import 'package:catalog_app/widgets/homeWidgets/catalogHeader.dart';
 import 'package:catalog_app/widgets/homeWidgets/catalogList.dart';
-import 'package:catalog_app/widgets/theme.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   void dispose() {
-    // TODO: implement dispose
+  
     super.dispose();
   }
 

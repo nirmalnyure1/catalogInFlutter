@@ -21,7 +21,7 @@ class CatalogList extends StatelessWidget {
                 builder: (
                   BuildContext context,
                 ) {
-                  return HomeDetailPage(catalog: catalog);
+                  return HomeDetailPage(catalog: CatalogModel.items[index]);
                 },
               ),
             );
