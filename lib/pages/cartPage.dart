@@ -25,8 +25,8 @@ class CartPage extends StatelessWidget {
 }
 
 class _CartTotal extends StatelessWidget {
-   _CartTotal({Key? key}) : super(key: key);
-final _cart = Cart();
+  _CartTotal({Key? key}) : super(key: key);
+  final _cart = Cart();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -35,7 +35,11 @@ final _cart = Cart();
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          "\$${_cart.totalPrice}".text.xl4.color(context.theme.accentColor).make(),
+          "\$${_cart.totalPrice}"
+              .text
+              .xl4
+              .color(context.theme.accentColor)
+              .make(),
           ElevatedButton(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(
@@ -60,23 +64,34 @@ final _cart = Cart();
   }
 }
 
-class _CartList extends StatelessWidget {
+class _CartList extends StatefulWidget {
   _CartList({Key? key}) : super(key: key);
+
+  @override
+  __CartListState createState() => __CartListState();
+}
+
+class __CartListState extends State<_CartList> {
   final _cart = Cart();
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: _cart.items.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            leading: Icon(Icons.done),
-            trailing: IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.remove_circle_outline),
-            ),
-            title: _cart.items[index].name.text.make(),
-          );
-        });
+    return _cart.items.isEmpty
+        ? "nothing to show".text.xl.make().centered()
+        : ListView.builder(
+            itemCount: _cart.items.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: Icon(Icons.done),
+                trailing: IconButton(
+                  onPressed: () {
+                    _cart.remove(_cart.items[index]);
+                    setState(() {});
+                  },
+                  icon: Icon(Icons.remove_circle_outline),
+                ),
+                title: _cart.items[index].name.text.make(),
+              );
+            });
   }
 }
