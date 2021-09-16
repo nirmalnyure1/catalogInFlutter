@@ -1,3 +1,4 @@
+import 'package:catalog_app/core/store.dart';
 import 'package:catalog_app/models/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -26,20 +27,27 @@ class CartPage extends StatelessWidget {
 
 class _CartTotal extends StatelessWidget {
   _CartTotal({Key? key}) : super(key: key);
-  final _cart = Cart();
   @override
   Widget build(BuildContext context) {
+    final Cart _cart = (VxState.store as MyStore).cart;
+
     return SizedBox(
       height: 200,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          "\$${_cart.totalPrice}"
-              .text
-              .xl4
-              .color(context.theme.accentColor)
-              .make(),
+          VxConsumer(
+            mutations: {RemoveMutation},
+            notifications: {},
+            builder: (BuildContext context, store, VxStatus? status) {
+              return "\$${_cart.totalPrice}"
+                  .text
+                  .xl4
+                  .color(context.theme.accentColor)
+                  .make();
+            },
+          ),
           ElevatedButton(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(
@@ -64,11 +72,12 @@ class _CartTotal extends StatelessWidget {
   }
 }
 
-class _CartList extends StatelessWidget{
-  final _cart = Cart();
-
+class _CartList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    VxState.watch(context, on: [RemoveMutation]);
+    final Cart _cart = (VxState.store as MyStore).cart;
+
     return _cart.items.isEmpty
         ? "nothing to show".text.xl.make().centered()
         : ListView.builder(
@@ -78,8 +87,7 @@ class _CartList extends StatelessWidget{
                 leading: Icon(Icons.done),
                 trailing: IconButton(
                   onPressed: () {
-                    _cart.remove(_cart.items[index]);
-                  
+                    RemoveMutation(_cart.items[index]);
                   },
                   icon: Icon(Icons.remove_circle_outline),
                 ),
