@@ -5,11 +5,12 @@ import 'package:catalog_app/utils/route.dart';
 import 'package:catalog_app/widgets/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:url_strategy/url_strategy.dart';
+//import 'package:url_strategy/url_strategy.dart';
 import 'pages/homepage.dart';
 
 void main() {
-  setPathUrlStrategy();
+  //for 
+  //setPathUrlStrategy();
   runApp(
     VxState(store: MyStore(), child: MyApp()),
   );
