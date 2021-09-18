@@ -1,7 +1,10 @@
+import 'package:catalog_app/core/store.dart';
+import 'package:catalog_app/models/cart.dart';
 import 'package:catalog_app/models/catalog.dart';
 import 'package:catalog_app/utils/route.dart';
 import 'package:catalog_app/widgets/homeWidgets/catalogHeader.dart';
 import 'package:catalog_app/widgets/homeWidgets/catalogList.dart';
+import 'package:catalog_app/widgets/theme.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,26 +33,38 @@ class _HomePageState extends State<HomePage> {
         List.from(productData).map<Item>((item) => Item.fromMap(item)).toList();
     setState(() {});
   }
+
   @override
   void dispose() {
-  
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final _cart = (VxState.store as MyStore).cart;
     return Scaffold(
       //backgroundColor: context.cardColor,
       backgroundColor: Theme.of(context).canvasColor,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, MyRoutes.cartPageRoute);
+      floatingActionButton: VxBuilder(
+        mutations: {AddMutation, RemoveMutation},
+        builder: (BuildContext context, store, VxStatus? status) {
+          return FloatingActionButton(
+            onPressed: () {
+              Navigator.pushNamed(context, MyRoutes.cartPageRoute);
+            },
+            backgroundColor: context.canvasColor,
+            child: Icon(
+              Icons.stroller_outlined,
+              color: context.accentColor,
+            ),
+          ).badge(
+              count: _cart.items.length,
+              size: 20,
+              color: context.accentColor,
+              textStyle: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  color: context.theme.canvasColor));
         },
-        backgroundColor: context.canvasColor,
-        child: Icon(
-          Icons.stroller_outlined,
-          color: context.accentColor,
-        ),
       ),
       body: SafeArea(
         child: Container(
