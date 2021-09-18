@@ -12,37 +12,48 @@ class ItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final image = catalog.image;
-    return VxBox(
-      child: Row(
-        children: [
-          Hero(
-            tag: Key(catalog.id.toString()),
-            child: CatalogImage(
-              image: image,
-            ),
-          ),
-          Expanded(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              catalog.name.text.lg.bold.color(context.accentColor).make(),
-              catalog.desc.text.make(),
-              10.heightBox,
-              ButtonBar(
-                buttonPadding: Vx.m0,
-                //buttonPadding: EdgeInsets.zero,
-                alignment: MainAxisAlignment.spaceAround,
-                children: [
-                  "\$${catalog.price}".text.bold.make(),
-                  AddToCart(catalog: catalog).pOnly(right: 10)
-                ],
-              )
-            ],
-          ))
-        ],
+    var children2 = [
+      Hero(
+        tag: Key(catalog.id.toString()),
+        child: CatalogImage(
+          image: image,
+        ),
       ),
-    ).color(context.cardColor).roundedLg.square(150).make().py(12);
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            catalog.name.text.lg.bold.color(context.accentColor).make(),
+            catalog.desc.text.make(),
+            10.heightBox,
+            ButtonBar(
+              buttonPadding: Vx.m0,
+              //buttonPadding: EdgeInsets.zero,
+              alignment: MainAxisAlignment.spaceAround,
+              children: [
+                "\$${catalog.price}".text.bold.make(),
+                AddToCart(catalog: catalog).pOnly(right: 10)
+              ],
+            )
+          ],
+        ).p(context.isMobile ? 0 : 16),
+      ),
+    ];
+    return VxBox(
+            child: context.isMobile
+                ? Row(
+                    children: children2,
+                  )
+                : Column(
+                    //mainAxisAlignment: MainAxisAlignment.center,
+                    //crossAxisAlignment: CrossAxisAlignment.center,
+                    children: children2,
+                  ))
+        .color(context.cardColor)
+        .roundedLg
+        .square(150)
+        .make()
+        .py(12);
   }
 }
-
