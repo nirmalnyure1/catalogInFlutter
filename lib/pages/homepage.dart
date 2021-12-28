@@ -1,14 +1,15 @@
+import 'dart:convert' as convert;
+
 import 'package:catalog_app/core/store.dart';
 import 'package:catalog_app/models/cart.dart';
 import 'package:catalog_app/models/catalog.dart';
 import 'package:catalog_app/utils/route.dart';
 import 'package:catalog_app/widgets/homeWidgets/catalogHeader.dart';
 import 'package:catalog_app/widgets/homeWidgets/catalogList.dart';
-import 'package:flutter/services.dart';
-import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert' as convert;
+import 'package:flutter/services.dart';
+import 'package:velocity_x/velocity_x.dart';
 //import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
@@ -17,10 +18,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  
   //url of api
   //final url = "";
-  
+
   @override
   void initState() {
     super.initState();
@@ -30,10 +30,10 @@ class _HomePageState extends State<HomePage> {
   loadData() async {
     await Future.delayed(Duration(seconds: 2));
 
-// for hardcode data   
+// for hardcode data
     var catalogJson = await rootBundle.loadString('assets/files/catalog.json');
-    
-    //for api 
+
+    //for api
     // var response = await http.get(Uri.parse(url));
     // final catalogJson = response.body;
 
@@ -59,8 +59,9 @@ class _HomePageState extends State<HomePage> {
         mutations: {AddMutation, RemoveMutation},
         builder: (BuildContext context, store, VxStatus? status) {
           return FloatingActionButton(
-            onPressed: () {
-              Navigator.pushNamed(context, MyRoutes.cartPageRoute);
+            onPressed: () async {
+              // Navigator.pushNamed(context, MyRoutes.cartPageRoute);
+              await context.vxNav.push(Uri.parse(MyRoutes.cartPageRoute));
             },
             backgroundColor: context.canvasColor,
             child: Icon(

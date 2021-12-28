@@ -2,6 +2,7 @@ import 'package:catalog_app/utils/route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:velocity_x/src/extensions/context_ext.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -19,7 +20,8 @@ class _LoginPageState extends State<LoginPage> {
         changeButton = true;
       });
       await Future.delayed(Duration(seconds: 1));
-      await Navigator.pushNamed(context, MyRoutes.homeRoute);
+      await context.vxNav.push(Uri.parse(MyRoutes.homeRoute));
+      // await Navigator.pushNamed(context, MyRoutes.homeRoute);
       setState(() {
         changeButton = false;
       });
@@ -98,7 +100,6 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         SizedBox(height: 50.0),
-
                         Material(
                           color: Theme.of(context).primaryColor,
                           borderRadius:
@@ -122,7 +123,6 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         )
-                       
                       ],
                     ),
                   )

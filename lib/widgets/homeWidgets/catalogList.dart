@@ -1,7 +1,6 @@
 import 'package:catalog_app/models/catalog.dart';
-import 'package:catalog_app/pages/homeDetail.dart';
+import 'package:catalog_app/utils/route.dart';
 import 'package:catalog_app/widgets/homeWidgets/itemView.dart';
-
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -23,17 +22,19 @@ class CatalogList extends StatelessWidget {
               final catalog = CatalogModel.items[index];
               return InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (
-                        BuildContext context,
-                      ) {
-                        return HomeDetailPage(
-                            catalog: CatalogModel.items[index]);
-                      },
-                    ),
-                  );
+                  context.vxNav.push(
+                      Uri(
+                          path: MyRoutes.homeDetailRoute,
+                          queryParameters: {"id": catalog.id.toString()}),
+                      params: catalog);
+                  // Navigator.push(context, MaterialPageRoute(builder: (
+                  //   BuildContext context,
+                  // ) {
+                  //   return HomeDetailPage(catalog: CatalogModel.items[index]);
+                  // }));
+
+                  // context.vxNav.push(Uri.parse(MyRoutes.homeDetailRoute),
+                  //     params: catalog);
                 },
                 child: ItemView(catalog: catalog),
               );
@@ -47,17 +48,11 @@ class CatalogList extends StatelessWidget {
               final catalog = CatalogModel.items[index];
               return InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (
-                        BuildContext context,
-                      ) {
-                        return HomeDetailPage(
-                            catalog: CatalogModel.items[index]);
-                      },
-                    ),
-                  );
+                  context.vxNav.push(
+                      Uri(
+                          path: MyRoutes.homeDetailRoute,
+                          queryParameters: {"id": catalog.id.toString()}),
+                      params: catalog);
                 },
                 child: ItemView(catalog: catalog),
               );
